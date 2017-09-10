@@ -1,0 +1,10 @@
+Package: Squeaky
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Aiden V. Johnson
+Maintainer: aiden.dataminer@gmail.com
+Description: Package for cleaning and organizing data.
+License: MIT
+Encoding: UTF-8
+LazyData: true
