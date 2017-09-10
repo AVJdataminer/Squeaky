@@ -8,3 +8,9 @@ Description: Package for cleaning and organizing data.
 License: MIT
 Encoding: UTF-8
 LazyData: true
+Imports: tidyverse,
+    purrr,
+    PCAmixdata,
+    forcats,
+    dplyr,
+    caret
