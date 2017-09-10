@@ -1,6 +1,6 @@
 Package: Squeaky
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Data Cleansing and Organization
 Version: 0.1.0
 Authors@R: person("Aiden", "Johnson", role=c("aut", "cre"),
   email = "aiden.dataminer@gmail.com")
