@@ -9,6 +9,6 @@ CountNA<-function(df){
     gather(feature,num_nulls)%>%
     if(num_nulls>0){filter(num_nulls>0)%>%
     print(n=50)} else {print("No NA's Found")}
-  return(out))
+  return(out)
 }
 
