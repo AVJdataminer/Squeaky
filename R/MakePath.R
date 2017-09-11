@@ -1,9 +1,9 @@
-MakePath<-function(home,codein){
+MakePath<-function(home){
 #set function = modelpath
 st=format(Sys.time(), "%d_%b_%Y_%H.%M")
 setwd(home)
 len=nchar(getwd())
-subDir=paste(substr(getwd(),1,len),"/suw_modeling_work_",st,sep="")
+subDir=paste(substr(getwd(),1,len),"/modeling_work_",st,sep="")
 #check if directory exists, if not create it
 if (file.exists(subDir)){
   setwd(subDir)
