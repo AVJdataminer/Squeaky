@@ -7,7 +7,7 @@ CountNA<-function(df){
   out=df%>%
     map_df(function(x) sum(is.na(x)))%>%
     gather(feature,num_nulls)%>%
-    num_nulls>0 %>%
+    filter(num_nulls>0) %>%
     print(n=50)
   return(out)
 }
