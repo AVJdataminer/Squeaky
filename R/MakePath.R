@@ -24,7 +24,7 @@ figures=paste(subDir,"/figures",sep="")
 ifelse(file.exists(figures),,dir.create(file.path(figures)))
 
 #create reporting folder
-figures=paste(subDir,"/reporting",sep="")
+reporting=paste(subDir,"/reporting",sep="")
 ifelse(file.exists(reporting),,dir.create(file.path(reporting)))
 return(subDir)
 }
