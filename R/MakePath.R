@@ -13,18 +13,18 @@ if (file.exists(subDir)){
 }
 
 pathin<-paste(subDir,"/model_data",sep="")
-ifelse(file.exists(pathin),,dir.create(file.path(pathin)))
+ifelse(file.exists(pathin),setwd(pathin),dir.create(file.path(pathin)))
 
 #create output folder
 outpath=paste(subDir,"/output",sep="")
-ifelse(file.exists(outpath),,dir.create(file.path(outpath)))
+ifelse(file.exists(outpath),NULL,dir.create(file.path(outpath)))
 
 #create figures folder
 figures=paste(subDir,"/figures",sep="")
-ifelse(file.exists(figures),,dir.create(file.path(figures)))
+ifelse(file.exists(figures),NULL,dir.create(file.path(figures)))
 
 #create reporting folder
 reporting=paste(subDir,"/reporting",sep="")
-ifelse(file.exists(reporting),,dir.create(file.path(reporting)))
+ifelse(file.exists(reporting),NULL,dir.create(file.path(reporting)))
 return(subDir)
 }
