@@ -1,5 +1,5 @@
 #requires the response variable be named response
-Train_test1<-function(modelpath,df,percent){
+TrainTest<-function(modelpath,df,percent){
   modeldata=df
   setwd(modelpath)
   in_train <- caret::createDataPartition(modeldata[['response']], p = percent, list = FALSE)
