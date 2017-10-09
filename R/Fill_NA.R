@@ -21,7 +21,7 @@ Fill_NA<-function(x,home,modelpath){
   }
   ))
   #treat factor or character Na's
-  df1=lapply(ds$X.quali,fct_explicit_na)
+  df1=lapply(ds$X.quali,forcats::fct_explicit_na)
   #paste two df's back together
   out1=cbind(dat2,df1)
   #write.csv(out1, "Na_filled.csv", row.names = F)
