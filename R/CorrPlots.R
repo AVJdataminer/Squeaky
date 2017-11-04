@@ -34,8 +34,8 @@ require(dplyr)
   setwd(paste(modelpath, '/figures', sep=""))
   png("var_corr_all.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
-  ggh2
-  dev.off()
+  print(ggh2)
+  device.off()
   
   #recalc cor
   corm2=cor(df2)
@@ -44,8 +44,8 @@ require(dplyr)
   setwd(paste(modelpath, '/figures', sep=""))
   png("var_corr_deleted.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
-  ggh2
-  dev.off()
+  print(ggh2)
+  device.off()
   
   #recalc cor
   ds=select(df3, -response)
@@ -57,9 +57,9 @@ require(dplyr)
   setwd(paste(modelpath, '/figures', sep=""))
   png("var_corr_kept.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
-  ggh2
-  dev.off()
+  print(ggh2)
+  device.off()
 
   return(df3)
   
-} 
+}
