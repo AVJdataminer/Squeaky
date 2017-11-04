@@ -6,6 +6,7 @@ require(ggplot2)
 require(GGally)
 require(corrplot)
 require(dplyr)
+require(caret)
   #remove response variable
   ds=select(df, -response)
   #remove factor variables
