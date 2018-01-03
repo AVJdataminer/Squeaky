@@ -2,13 +2,14 @@
 #output to modelpath figures and reporting
 
 CorrPlots<-function(df,response,modelpath){
+ # df=noNAnzv
 require(ggplot2)
 require(GGally)
 require(corrplot)
 require(dplyr)
-require(caret)
+  require(caret)
   #remove response variable
-  ds=select(df, -response)
+  #ds=select(df, -response)
   #remove factor variables
   rain=PCAmixdata::splitmix(ds)
   corm=cor(rain$X.quanti)
@@ -22,45 +23,58 @@ require(caret)
    }
   cormat <- reorder_cormat(corm)
   
-  hc=findCorrelation(cormat, cutoff = 0.50)
-  df2 <- data.frame(subset(df, select = c(hc)))
-  vars=paste("-", names(df2), sep="")
-  print(names(df2))
-  df3=select_(df,.dots = vars)
-  write.csv(df2,paste(modelpath, '/reporting/df_cor_vars_deleted.csv',sep=""), row.names = F)
-  write.csv(names(df2),paste(modelpath, '/reporting/cor_vars_deleted.csv',sep=""),row.names = F)
-  write.csv(data.frame(df3, df$response),paste(modelpath, '/data_cor_vars_kept.csv',sep=""),row.names = F)
+  
+  hc=findCorrelation(cormat, cutoff = 0.50,names=TRUE, exact = TRUE)
+  vars=paste("-", hc, sep="")
+  df2=select_(df,.dots = vars)
+  
+  # sim=PCAmixdata::splitmix(df2)
+  # corm2=cor(sim$X.quanti)
+  # cormat2 <- reorder_cormat(corm2)
+  # ha=findCorrelation(cormat2, cutoff = 0.20,exact=T,names=T)
+  # vars2=paste("-",ha,sep = "")
+  # df2.3 <- select_(df2,.dots=vars2)
+  
+  
+  #write.csv(df2.3,paste(modelpath, '/reporting/df_cor_vars_deleted.csv',sep=""), row.names = F)
+  write.csv(c(hc),paste(modelpath, '/reporting/cor_vars_deleted.csv',sep=""),row.names = F)
+  write.csv(data.frame(df2, df$response),paste(modelpath, '/data_cor_vars_kept.csv',sep=""),row.names = F)
   
   #save corr plot
   setwd(paste(modelpath, '/figures', sep=""))
-  png("var_corr_all.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
+  png("var_corr_all.png", width = 1400, height = 1100)
+    print(ggh2)
+  dev.off()
+  pdf("var_corr_all.pdf", width = 8, height = 8)
   print(ggh2)
-  device.off()
+  dev.off()
   
-  #recalc cor
-  corm2=cor(df2)
-  cormat <- reorder_cormat(corm2)
   #deleted cor
   setwd(paste(modelpath, '/figures', sep=""))
   png("var_corr_deleted.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
-  print(ggh2)
-  device.off()
+    print(ggh2)
+  dev.off()
   
-  #recalc cor
-  ds=select(df3, -response)
-  #remove factor variables
-  wind=PCAmixdata::splitmix(ds)
-  corm3=cor(wind$X.quanti)
-  cormat <- reorder_cormat(corm3)
+  pdf("var_corr_deleted.pdf", width = 8, height = 8)
+  print(ggh2)
+  dev.off()
+
   #keptd cor
   setwd(paste(modelpath, '/figures', sep=""))
   png("var_corr_kept.png", width = 1400, height = 1100)
   ggh2=GGally::ggcorr(cormat, nbreaks=5)
+    print(ggh2)
+  dev.off()
+  pdf("var_corr_kept.pdf", width = 8, height = 8)
   print(ggh2)
-  device.off()
-
-  return(df3)
+  dev.off()
+  return(df2)
   
 }
+rain=PCAmixdata::splitmix(df)
+corm=cor(rain$X.quanti)
+ggh2=GGally::ggcorr(corm, nbreaks=5)
+ggh2
+CorrPlots(df,out.n,paste(modelpath,"/figures", sep=""))

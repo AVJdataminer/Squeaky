@@ -1,4 +1,4 @@
-CountNA<-function(df){
+CountNA<-function(df, present){
   #example input natable=CountNA(df)
   require(tidyverse)
   require(purrr)
@@ -7,8 +7,9 @@ CountNA<-function(df){
   out=df%>%
     map_df(function(x) sum(is.na(x)))%>%
     gather(feature,num_nulls)%>%
-    filter(num_nulls>0) %>%
-    print(n=50)
+    filter(num_nulls>0)
+#write out the names of deleted vars
+write.csv(names(out),paste(present,"/Count50_deleted.csv",sep=""))
   return(out)
 }
 
